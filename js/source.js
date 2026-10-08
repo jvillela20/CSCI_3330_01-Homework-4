@@ -19,16 +19,34 @@ localStorage.setItem("track_id_1", "34vXRJ2bCSFiZKQzVUYVOb");
 localStorage.setItem("track_id_2", "1PREzVLuDT6PSE9sej4wnV");
 localStorage.setItem("track_id_3", "0YNVhxPfqDJSdrJhxduohQ");
 
+// Albums ID's
+localStorage.setItem("album_id_1", "6Zk9W9Ab3CnhttW5nBOUnY");
+localStorage.setItem("album_id_2", "5utxE1ImIDJFXRHf137hoy");
+localStorage.setItem("album_id_3", "5UeZ5HFbQAsSev59aKCWKq");
+localStorage.setItem("album_id_4", "0Nlac12HchvCla00JkCnls");
 
-function load(){
+
+async function load(){
     
     let artistID = localStorage.getItem("artist_id");
     let accessToken = localStorage.getItem("access_token");
     let trackID1 = localStorage.getItem("track_id_1");
     let trackID2 = localStorage.getItem("track_id_2");
     let trackID3 = localStorage.getItem("track_id_3");
-    
-    
+
+    let albumID1 = localStorage.getItem("album_id_1");
+    let albumID2 = localStorage.getItem("album_id_2");
+    let albumID3 = localStorage.getItem("album_id_3");
+    let albumID4 = localStorage.getItem("album_id_4");
+
+    const artistResponse = await fetch(`https://api.spotify.com/v1/artists/${artistID}`,
+      {headers: {Authorization: `Bearer ${accessToken}`}
+    });
+
+    const artistData = await artistResponse.json();
+
+    document.querySelector(`.artist-name`).textContent = artistData.name;
+
 }
 load();
 
